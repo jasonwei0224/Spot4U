@@ -87,6 +87,10 @@
       #btnParking {
         font-size:15px;
       }
+      #btnConfirm {
+        font-size:15px;
+        text-align: center;
+      }
     </style>
     <!-- <link href="./css/style.css"> -->
     <script src="js/googleMap.js"></script>
@@ -138,18 +142,18 @@
                   <div class="form-group row">
                       <label for="example-time-input" class="col-2 col-form-label">Time</label>
                       <div class="col-10">
-                        <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+                        <input class="form-control" type="time" value="13:45:00" id="example-time-input1">
                       </div>
                   </div>
                   <div class="form-group row">
                       <label for="example-time-input" class="col-2 col-form-label">Time</label>
                       <div class="col-10">
-                        <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+                        <input class="form-control" type="time" value="15:45:00" id="example-time-input2">
                       </div>
                   </div>
 
-                  <div id="buttonContents">
-                      <button class="btn btn-light">CONFIRM</button>
+                  <div id="btnConfirm">
+                      <button class="btn btn-light" data-toggle="modal" data-target="#exampleModal">CONFIRM</button>
                   </div>
             </div>
           </div>
@@ -167,7 +171,47 @@
     <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
     <div id="map"></div>
 	
-    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Your Parking Fee</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="row"> 
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                      Debit/Credit
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                    <label class="form-check-label" for="exampleRadios2">
+                      Your Mileage
+                    </label>
+                  </div>
+            </div>
+            <div class="col-1"></div>
+            
+            
+          </div>
+          
+          <div id="feeTarget" class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
     
     
 	
@@ -205,7 +249,29 @@
       $("#btnParking").click(function() {
         $("#toggleDiv").slideToggle("slow");
       });
+
+      var start=parseTime(document.getElementById("example-time-input1").value);
+      var end=parseTime(document.getElementById("example-time-input2").value);
+      var diff=end-start;
+
+      console.log(diff);
+
+      // console.log(diff);
+      $('#btnConfirm').click(function() {      
+        
+        document.getElementById("feeTarget").innerHTML=calculation(diff);
+        // working();
+        // refreshPage();
+      });
     });
+
+    function parseTime(s) {
+      var c = s.split(':');
+      return parseInt(c[0]) * 60 + parseInt(c[1]);
+    }
+    function refreshPage(){
+          window.location.reload();
+        }
     </script>
 
   </body>

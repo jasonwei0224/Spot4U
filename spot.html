@@ -23,37 +23,25 @@
         </nav>
         
         <div class="flipper"
-
-    data-datetime="2019-11-09 16:00:00"
-
-    data-template="ddd|HH|ii|ss"
-
-    data-labels="Days|Hours|Minutes|Seconds"
-
-    data-reverse="true"
-
-    id="myFlipper">
-
-</div>
+            data-datetime="2019-11-09 16:00:00"
+            data-template="ddd|HH|ii|ss"
+            data-labels="Days|Hours|Minutes|Seconds"
+            data-reverse="true"
+            id="myFlipper">
+        </div>
 
         <div id="note">
-        <span id="parkNo">PARKING SPOT #9824</span><br><br><i>If you are done using the spot, click the button below and get credit for the remaining duration.</i><br>
+            <span id="parkNo">PARKING SPOT #9824</span><br><br><i>If you are done using the spot, click the button below and get credit for the remaining duration.</i><br>
 			<a href="maps.html"> <button class="btn btn-success btn-lg btn-block done" type="submit">I'm Done</button></a>
         </div>
         
- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="./jquery.flipper-responsive.js"></script>
+        <script>
 
-<script src="./jquery.flipper-responsive.js"></script>
-<script>
-//    $(document).ready(function() {
-//        document.getElementById('myFlipper').setAttribute("data-datetime", "PT15H10M");
-$(function(){
-  $('#myFlipper').flipper('init');
-
-    
-});
-//});
-</script>
+            $(function(){
+                $('#myFlipper').flipper('init');
+            });
+        </script>
     </body>
-    
 </html>
