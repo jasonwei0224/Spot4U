@@ -1,0 +1,34 @@
+.navbar{
+    margin-bottom: 50px;
+    background-color: black
+}
+
+
+.form-inline{
+    width: 50%;
+    margin: 0 auto
+}
+
+.form-control{
+    padding-right: 38%;
+}
+#name{
+    color: #ffa500;
+    font-weight: bold
+}
+.jumbotron{
+    background-color: white
+}
+body{
+    background-image: url("back.jpeg");
+    height: 100%
+}
+
+html{
+    height: 100%
+}
+
+.btn-1{
+    float: left;
+    margin-left: 75%;
+}
