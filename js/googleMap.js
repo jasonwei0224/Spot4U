@@ -14,6 +14,7 @@ function initMap() {
   var lngStart;
   var latEnd;
   var lngEnd;
+
   var database = firebase.database().ref('/street/').once("value").then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
       console.log(childSnapshot.val());
