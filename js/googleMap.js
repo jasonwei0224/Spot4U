@@ -1,4 +1,5 @@
 var map;
+var price;
 
 
 function initMap() {
@@ -48,6 +49,8 @@ function initMap() {
     flightPath.setMap(map);
     google.maps.event.addListener(flightPath, 'click', function() {
       openNav();
+      price=childSnapshot.val().price;
+      document.getElementById('price').innerHTML='C$'+price+'<br>'+"2 hours";
     });
     })
 
