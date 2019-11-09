@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel=stylesheet href="main.css">
+        <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </head>
     
@@ -15,7 +16,7 @@
                 <img src="Map-Marker-Free-Download-PNG.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 Spot4U
             </a>
-            <button class="btn btn-outline-primary btn-1" href="#">Sign In</button>
+            <button id="signin" class="btn btn-outline-primary btn-1" href="#">Sign In</button>
             <a href="spot.html"> <button class="btn btn-outline-warning" href="#">Your Spots</button></a>
         </nav>
         <div class="container"> 
@@ -34,5 +35,78 @@
     </form>
     
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+    <!-- // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-auth.js"></script>
+	<script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyCDwBPIJKwSePtKYTavskl__vlcF3UCMB0",
+        authDomain: "decodecongestion.firebaseapp.com",
+        databaseURL: "https://decodecongestion.firebaseio.com",
+        projectId: "decodecongestion",
+        storageBucket: "decodecongestion.appspot.com",
+        messagingSenderId: "609652524330",
+        appId: "1:609652524330:web:f3e5a1fb13c391f4260a53",
+        measurementId: "G-WRBXY26SJS"
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+	  firebase.auth
+   
+    </script>
+	<script>
+	var ui = new firebaseui.auth.AuthUI(firebase.auth());
+	var uiConfig = {
+		callbacks: {
+		signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+		// User successfully signed in.
+        // Return type determines whether we continue the redirect automatically
+        // or whether we leave that to developer to handle.
+        return true;
+        },
+        uiShown: function() {
+        // The widget is rendered.
+        // Hide the loader.
+        document.getElementById('loader').style.display = 'none';
+        }
+    },signInFlow: 'popup',
+    // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+    signInSuccessUrl: "index.html",
+    signInOptions: [
+        // Leave the lines as is for the providers you want to offer your users.
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    ],
+    };
+    ui.start('#firebaseui-auth-container', uiConfig);
+
+
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if(user) {
+            document.getElementById("signin").textContent = "Log out ";
+
+        }
+        // firebase.database().ref("Users/" + user.uid).update({
+        //   "name": user.displayName,
+        //   "email": user.email,
+            // "credit": 0
+        // });
+    });
+
+    function logout() {
+        firebase.auth().signOut().then(function () {
+            localStorage.setItem('uid', "");
+            // Sign-out successful.
+        }).catch(function (error) {
+            // An error happened.
+    });
+        
+    </script>
     </body>
 </html>
