@@ -20,7 +20,7 @@
             </a>
            <button id="signinb" class="btn btn-outline-primary btn-1" href="#" onclick= "showSignIn()">Sign In</button>
 			<button id="signout" class="btn btn-outline-primary btn-1" href="#" style= "visibility:hidden" onclick= "logout()">Sign Out </button>
-            <a href="spot.html"> <button class="btn btn-outline-warning" href="#" id="yourspot"  style= "visibility:hidden" >Your Spots</button></a>
+            <button class="btn btn-outline-warning" href="#" id="yourspot"  style= "visibility:hidden" onclick= "goToSpot()" >Your Spots</button>
         </nav>
         <div class="container"> 
         
@@ -52,7 +52,7 @@
 	<script>
 		function showSignIn(){
 			
-			/document.getElementById("nav").style.display = 'none';/
+			/*document.getElementById("nav").style.display = 'none';*/
 			document.getElementById("firebaseui-auth-container").style.visibility = "visible";
 		}
 	
@@ -103,7 +103,6 @@
            document.getElementById("signinb").style.visibility = "hidden";
 			document.getElementById("signout").style.visibility = "visible";
 			document.getElementById("yourspot").style.visibility = "visible";
-			
         }
         firebase.database().ref("Users/" + user.uid).update({
 			"name": user.displayName,
@@ -111,7 +110,10 @@
             "credit": 0
         });
     });
-
+	
+	function goToSpot(){
+		window.location.href="spot.html";
+	}	
     function logout() {
 	
         firebase.auth().signOut().then(function () {
