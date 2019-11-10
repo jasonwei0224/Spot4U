@@ -84,13 +84,9 @@
     ],
     };
     ui.start('#firebaseui-auth-container', uiConfig);
-
-
-
     firebase.auth().onAuthStateChanged(function (user) {
         if(user) {
             document.getElementById("signin").textContent = "Log out ";
-
         }
         // firebase.database().ref("Users/" + user.uid).update({
         //   "name": user.displayName,
@@ -98,7 +94,6 @@
             // "credit": 0
         // });
     });
-
     function logout() {
         firebase.auth().signOut().then(function () {
             localStorage.setItem('uid', "");
