@@ -6,6 +6,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel=stylesheet href="main.css">
         <link rel=stylesheet href="./responsive-flip-countdown/style.css">
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
        
@@ -32,10 +34,34 @@
 
         <div id="note">
             <span id="parkNo">PARKING SPOT #9824</span><br><br><i>If you are done using the spot, click the button below and get credit for the remaining duration.</i><br>
-			<button class="btn btn-success btn-lg btn-block done" type="submit" onclick = "done()">I'm Done</button>
+			<button class="btn btn-success btn-lg btn-block done" data-toggle="modal" data-target="#myModal">I'm Done</button>
         </div>
-        
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <!-- <h4 class="modal-title">Modal Header</h4> -->
+              </div>
+              <div class="modal-body">
+                <h4>You can get $0.8 credit for remaining time</h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+
+
+
         <script src="./jquery.flipper-responsive.js"></script>
         <script>
             $(function(){
@@ -103,15 +129,15 @@
     });		
 	}
     
-	function done(){
-	if (firebase.auth().currentUser !== null){
-		firebase.database().ref("Users/" + firebase.auth().currentUser.uid).update({
-		"name": firebase.auth().currentUser.displayName,
-			"email": firebase.auth().currentUser.email,
-            "credit": 20
-        });
-	}
-		}
+	// function done(){
+	// if (firebase.auth().currentUser !== null){
+	// 	firebase.database().ref("Users/" + firebase.auth().currentUser.uid).update({
+	// 	"name": firebase.auth().currentUser.displayName,
+	// 		"email": firebase.auth().currentUser.email,
+    //         "credit": 20
+    //     });
+	// }
+	// 	}
         function checkTime(i) {
                 if (i < 10) {
                     i = "0" + i;
