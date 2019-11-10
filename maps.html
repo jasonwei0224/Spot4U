@@ -214,8 +214,11 @@
         
             <div class="modal-footer">
               <div class="col-2"></div>
-              <div class="col-8">
+              <div class="col-4">
                   <button type="button" id="btnChange" class="btn btn-primary">Save</button>
+              </div>
+              <div>
+                  <button type="button" style='visibility:hidden;' id="btnChange2" class="btn btn-primary">Done</button>
               </div>
               <div class="col-2"></div>
               
@@ -275,7 +278,15 @@
 
         document.getElementById("feeTarget").innerHTML=calculation(diff);
         working();
-        refreshPage();
+        $('#btnChange').css('visibility', 'hidden');
+        $('#btnChange2').css('visibility', 'visible');
+
+        $('#btnChange2').click(function() {
+          refreshPage();
+
+        })
+        
+        
       });
     });
 
