@@ -12,7 +12,7 @@
 		
 	
     <body>
-        
+     <div id="bg">   
         <nav id= "nav" class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="#">
                 <img src="Map-Marker-Free-Download-PNG.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -24,21 +24,22 @@
         </nav>
         <div class="container"> 
         
-        <div class="jumbotron">
-  <h1 class="display-4">Welcome!</h1>
-  <p class="lead"><span id="name">Spot4U</span> helps you find a perfect parking spot in Downtown, Vancouver.</p>
-  <hr class="my-4">
-            <p>Find the available spots &amp; get credit for the time left in your parking duration after you free up the spot.</p>
+			<div class="jumbotron">
+				<h1 class="display-4">Welcome!</h1>
+				<p class="lead"><span id="name">Spot4U</span> helps you find a perfect parking spot in Downtown, Vancouver.</p>
+				<hr class="my-4">
+				<p>Find the available spots &amp; get credit for the time left in your parking duration after you free up the spot.</p>
 
-</div>
+			</div> 
            
             <form class="form-inline my-2 my-lg-0" action ="maps.html" >
-      <input class="form-control mr-lg-2" type="search" placeholder="Looking for a spot?" aria-label="Search">
-	  <button class="btn btn-success my-2 my-sm-0" type="submit" >Search</button>
-    </form>
+				<input class="form-control mr-lg-2" type="search" placeholder="Looking for a spot?" aria-label="Search">
+				<button class="btn btn-success my-2 my-sm-0" type="submit" >Search</button>
+			</form>
     
-    </div>
-	<div id="firebaseui-auth-container" style= "visibility:hidden"></div>
+		</div>
+	</div>
+	<div id="firebaseui-auth-container" style= "visibility:hidden; top:0; bottom:200"></div>
 	<div id="loader"></div>
 
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
@@ -54,6 +55,7 @@
 			
 			// /document.getElementById("nav").style.display = 'none';/
 			document.getElementById("firebaseui-auth-container").style.visibility = "visible";
+			hide();
 		}
 	
       var firebaseConfig = {
@@ -126,7 +128,10 @@
             // An error happened.
     });
 	}
-        
+       
+		function hide(){
+			document.getElementById("bg").style.display = "none";
+			}
     </script>
     </body>
 </html>
