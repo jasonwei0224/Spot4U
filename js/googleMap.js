@@ -98,4 +98,3 @@ function calculation(n) {
   return 'Your parking fee is $'+(n/60)*price;
   
 }
-

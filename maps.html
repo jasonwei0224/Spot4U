@@ -19,8 +19,6 @@
         margin: 0;
         padding: 0;
       }
-
-
       /* The side navigation menu */
       .sidenav {
         height: 100%; /* 100% Full-height */
@@ -34,7 +32,6 @@
         padding-top: 60px; /* Place content 60px from the top */
         transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
       }
-
       /* The navigation menu links */
       .sidenav a {
         padding: 8px 8px 8px 32px;
@@ -47,12 +44,10 @@
       .sidenav div {
         color:white;
       }
-
       /* When you mouse over the navigation links, change their color */
       .sidenav a:hover {
         color: #f1f1f1;
       }
-
       /* Position and style the close button (top right corner) */
       .sidenav .closebtn {
         position: absolute;
@@ -61,19 +56,16 @@
         font-size: 36px;
         margin-left: 50px;
       }
-
       /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
       #main {
         transition: margin-left .5s;
         padding: 20px;
       }
-
       /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
       @media screen and (max-height: 450px) {
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
       }
-
       
       #buttonContents {
         margin-top:50px;
@@ -102,8 +94,9 @@
                 <img src="Map-Marker-Free-Download-PNG.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 Spot4U
             </a>
-            <button class="btn btn-outline-primary btn-1" href="#">Sign In</button>
-            <a href="spot.html"> <button class="btn btn-outline-warning" href="#">Your Spots</button></a>
+            <!--<button id ="signin" class="btn btn-outline-primary btn-1" href="#">Sign In</button>-->
+			<button id="signout" class="btn btn-outline-primary btn-1" href="#" style= "visibility:hidden" onclick= "logout()">Sign Out </button>
+            <a href="spot.html"> <button id="yourspot" class="btn btn-outline-warning" href="#">Your Spots</button></a>
         </nav>	
     </div>
   
@@ -173,45 +166,45 @@
 	
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Your Parking Fee</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="row"> 
-            <div class="col-1"></div>
-            <div class="col-10">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                    <label class="form-check-label" for="exampleRadios1">
-                      Debit/Credit
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                    <label class="form-check-label" for="exampleRadios2">
-                      Your Mileage
-                    </label>
-                  </div>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Your Parking Fee</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div class="col-1"></div>
-            
-            
-          </div>
-          
-          <div id="feeTarget" class="modal-body">
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="row"> 
+              <div class="col-2"></div>
+              <div id="feeTarget" class="col-8">
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                      <label class="form-check-label" for="exampleRadios1">
+                        Debit/Credit
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                      <label class="form-check-label" for="exampleRadios2">
+                        Your Mileage
+                      </label>
+                    </div>
+              </div>
+              <div class="col-2"></div>
+              
+              
+        
+            <div class="modal-footer">
+              <div class="col-2"></div>
+              <div class="col-8">
+                  <button type="button" id="btnChange" class="btn btn-primary">Save</button>
+              </div>
+              <div class="col-2"></div>
+              
+            </div>
           </div>
         </div>
       </div>
-    </div>
     
     
 	
@@ -223,6 +216,7 @@
     <!-- // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-auth.js"></script>
 
     <script>
       
@@ -238,6 +232,7 @@
       };
       firebase.initializeApp(firebaseConfig);
       firebase.analytics();
+	  firebase.auth
    
     </script>
 	<script async defer
@@ -250,15 +245,16 @@
         $("#toggleDiv").slideToggle("slow");
       });
 
-      var start=parseTime(document.getElementById("example-time-input1").value);
-      var end=parseTime(document.getElementById("example-time-input2").value);
-      var diff=end-start;
+      $('#btnChange').click(function() {      
+       
+        console.log(document.getElementById("example-time-input1").value); 
+        console.log(document.getElementById("example-time-input2").value); 
 
-      console.log(diff);
+        var start=parseTime(document.getElementById("example-time-input1").value);
+        var end=parseTime(document.getElementById("example-time-input2").value);
+        var diff=end-start;
+        console.log(diff);
 
-      // console.log(diff);
-      $('#btnConfirm').click(function() {      
-        
         document.getElementById("feeTarget").innerHTML=calculation(diff);
         // working();
         // refreshPage();
@@ -272,6 +268,44 @@
     function refreshPage(){
           window.location.reload();
         }
+    </script>
+	
+	<script>
+		function showHome(){
+			window.location.href="index.html";
+			}
+		function showSignIn(){
+			
+			/*document.getElementById("nav").style.display = 'none';*/
+			document.getElementById("firebaseui-auth-container").style.visibility = "visible";
+		}
+    firebase.auth().onAuthStateChanged(function (user) {
+        if(user) {
+			document.getElementById("signout").style.visibility = "visible";
+			document.getElementById("yourspot").style.visibility = "visible";
+        }
+        firebase.database().ref("Users/" + user.uid).update({
+			"name": user.displayName,
+			"email": user.email,
+            "credit": 0
+        });
+    });
+	
+    function logout() {
+	
+        firebase.auth().signOut().then(function () {
+			document.getElementById("signout").style.visibility = "hidden";
+			document.getElementById("yourspot").style.visibility = "hidden";
+			window.location.href="index.html";
+            // Sign-out successful.
+        }).catch(function (error) {
+            // An error happened.
+    });
+	}
+       
+	
+    
+   
     </script>
 
   </body>
