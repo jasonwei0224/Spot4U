@@ -7,17 +7,20 @@
         <link rel=stylesheet href="main.css">
         <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </head>
-    
+		<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+	</head>
+		
+	
     <body>
         
-        <nav class="navbar navbar-dark bg-dark">
+        <nav id= "nav" class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="#">
                 <img src="Map-Marker-Free-Download-PNG.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 Spot4U
             </a>
-            <button id="signin" class="btn btn-outline-primary btn-1" href="#">Sign In</button>
-            <a href="spot.html"> <button class="btn btn-outline-warning" href="#">Your Spots</button></a>
+           <button id="signinb" class="btn btn-outline-primary btn-1" href="#" onclick= "showSignIn()">Sign In</button>
+			<button id="signout" class="btn btn-outline-primary btn-1" href="#" style= "visibility:hidden" onclick= "logout()">Sign Out </button>
+            <a href="spot.html"> <button class="btn btn-outline-warning" href="#" id="yourspot"  style= "visibility:hidden" >Your Spots</button></a>
         </nav>
         <div class="container"> 
         
@@ -35,6 +38,8 @@
     </form>
     
     </div>
+	<div id="firebaseui-auth-container" style= "visibility:hidden"></div>
+	<div id="loader"></div>
 
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
 
@@ -45,6 +50,12 @@
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-auth.js"></script>
 	<script>
+		function showSignIn(){
+			
+			/document.getElementById("nav").style.display = 'none';/
+			document.getElementById("firebaseui-auth-container").style.visibility = "visible";
+		}
+	
       var firebaseConfig = {
         apiKey: "AIzaSyCDwBPIJKwSePtKYTavskl__vlcF3UCMB0",
         authDomain: "decodecongestion.firebaseapp.com",
@@ -84,23 +95,35 @@
     ],
     };
     ui.start('#firebaseui-auth-container', uiConfig);
+
+
+
     firebase.auth().onAuthStateChanged(function (user) {
         if(user) {
-            document.getElementById("signin").textContent = "Log out ";
+           document.getElementById("signinb").style.visibility = "hidden";
+			document.getElementById("signout").style.visibility = "visible";
+			document.getElementById("yourspot").style.visibility = "visible";
+			
         }
-        // firebase.database().ref("Users/" + user.uid).update({
-        //   "name": user.displayName,
-        //   "email": user.email,
-            // "credit": 0
-        // });
+        firebase.database().ref("Users/" + user.uid).update({
+			"name": user.displayName,
+			"email": user.email,
+            "credit": 0
+        });
     });
+
     function logout() {
+	
         firebase.auth().signOut().then(function () {
-            localStorage.setItem('uid', "");
+			document.getElementById("signinb").style.visibility = "visible";
+			document.getElementById("signout").style.visibility = "hidden";
+			document.getElementById("yourspot").style.visibility = "hidden";
+			window.location.href="index.html";
             // Sign-out successful.
         }).catch(function (error) {
             // An error happened.
     });
+	}
         
     </script>
     </body>
