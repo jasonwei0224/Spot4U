@@ -83,6 +83,23 @@
         font-size:15px;
         text-align: center;
       }
+      #test {
+        position: fixed;
+        background-color:rgb(245, 245, 173);
+        height:160px;
+        width:300px;
+        font:18px;
+        font-weight: bold;
+        top: 80px;
+        bottom: 0;
+        left: 1200px;
+        text-align: center;
+        z-index: 1000;
+        padding: 20px 0;
+        overflow-x: hidden;
+        /* overflow-y: auto; Scrollable contents if viewport is shorter than content. */
+        border-right: 1px solid #eee;
+      }
     </style>
     <!-- <link href="./css/style.css"> -->
     <script src="js/googleMap.js"></script>
@@ -159,7 +176,8 @@
       </div>
 
     </div>
-	
+    <div id="test"><h4>Street Parking Availablity</h4><br>
+      <h2>73%</h2> </div>
     
     <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
     <div id="map"></div>
