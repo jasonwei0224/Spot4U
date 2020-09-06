@@ -1,5 +1,5 @@
 # Spot 4 U
-This project is created at 2019 DeCode Congestioon Hackathon by City of the Vancouver.
+This project is done at 2019 DeCode Congestioon Hackathon by City of the Vancouver.
 The project provides users a map to look for available parking positions in Vancouver. 
 
 ## Table of contents
@@ -22,9 +22,9 @@ help with future city developments.
 ![Example screenshot](./Screenshots/map.png)
 ![Example screenshot](./Screenshots/spotselected.png)
 ![Example screenshot](./Screenshots/parkingfee.png)
-![Example screenshot](./Screenshots/parkingfee2.png)
+![Example screenshot](./Screenshots/parkingfees2.png)
 ![Example screenshot](./Screenshots/countdown.png)
-![Example screenshot](./Screenshots/complete parking.png)
+![Example screenshot](./Screenshots/completeparking.png)
 
 ## Technologies
 * HTML & CSS
